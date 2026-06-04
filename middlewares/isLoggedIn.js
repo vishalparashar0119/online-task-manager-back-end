@@ -11,7 +11,7 @@ export const isLoggedIn = async (req, res, next) => {
             data: null
         });
 
-        const decoded = jwt.verify(token, "onlineTaks@1234");
+        const decoded = jwt.verify(token, process.env.JWT_SECERET);
         const user = await UserModal.findOne({ email: decoded.email }).select('-password');
         if (!user) return res.status(404).json({
             status: false,

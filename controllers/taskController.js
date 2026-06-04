@@ -53,7 +53,7 @@ export const getMyTasks = async (req, res) => {
 export const updateTask = async (req, res) => {
     try {
         const { taskId } = req.params;
-
+        console.log(taskId);
         const task = await TaskModal.findOneAndUpdate(
             {
                 _id: taskId,
@@ -110,6 +110,9 @@ export const deleteTask = async (req, res) => {
         return res.status(200).json({
             success: true,
             message: "Task deleted successfully",
+            data : {
+                id:taskId
+            }
         });
     } catch (error) {
         console.log("Task Controller : Delete Task ::", error.message);
