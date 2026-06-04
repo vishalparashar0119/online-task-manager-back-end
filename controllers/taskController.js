@@ -1,6 +1,8 @@
 import TaskModal from "../modals/Task.js";
 import UserModal from "../modals/User.js";
 
+
+
 export const createTask = async (req, res) => {
     try {
         const { name, description, dueDate, priority, category, status } = req.body;
@@ -49,6 +51,31 @@ export const getMyTasks = async (req, res) => {
         });
     }
 };
+
+export const getSingleTask = async( req , res)=> {
+    try {
+        const {taskId} = req.params;
+        const task = await TaskModal.findById(taskId);
+        if(!task){
+            return res.status(404).json({
+                success: false,
+                message: "Task not found",
+                data:null,
+            });
+        }
+        return res.status(200).json({
+            success: true,
+            message: "Task fetched successfully",
+            data: task,
+        });
+    } catch (error) {
+        console.log("Task Controller : Get Single Task ::", error.message);
+        return res.status(500).json({
+            success: false,
+            message: "Something went wrong",
+        });
+    }
+}
 
 export const updateTask = async (req, res) => {
     try {

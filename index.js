@@ -6,6 +6,7 @@ import cors from 'cors';
 import { connectDb } from './database/dataBase.js';
 import userRouter from './routes/userRouter.js'
 import taskRouter from './routes/taskRouter.js';
+import './shedulars/emailSheduler.js';
 
 const app = express();
 const port = 3001;
